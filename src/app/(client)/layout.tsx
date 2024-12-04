@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Search, Settings2, User } from "lucide-react";
+import { Settings2, User } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { MobileNav } from "@/components/local/mobile-nav";
 import { Sidebar } from "@/components/local/sidebar";
 import book from "@/assets/book.svg";
+import ResponsiveHeader from '@/components/global/responsive-header';
 
 interface ClientLayout {
     children: React.ReactElement | React.ReactNode;
@@ -31,13 +31,8 @@ export default function Home({ children }: ClientLayout) {
               <h1 className="text-xl font-semibold text-white">Dua & Ruqyah</h1>
             </div>
 
-            <div className="relative flex-1 max-w-xl mx-auto lg:mx-0">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search by Dua Name"
-                className="pl-9 bg-[#1E2732] border-0 text-white placeholder:text-muted-foreground"
-              />
-            </div>
+            {/* header */}
+            <ResponsiveHeader/>
 
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="icon" className="text-white">
