@@ -4,7 +4,7 @@ import { DuaContent } from '../local/dua-content';
 export const MainContentArea = () => {
     return (
       <div>
-        <main className="flex-1 overflow-y-auto p-4">
+        <main className="flex-1 overflow-y-auto p-1">
           <DuaContent
             section="The servant is dependent on his Lord"
             title="1. The servant is dependent on his Lord #1"

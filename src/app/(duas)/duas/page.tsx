@@ -6,8 +6,6 @@ import { DuaSidebar } from "@/components/local/dua-sidebar";
 import { MobileNav } from "@/components/local/mobile-nav";
 import { categories } from "@/data/categories-data";
 
-
-
 export default function DuasPage() {
   return (
     <div className="h-screen overflow-hidden bg-[#0E1319]">
@@ -20,7 +18,7 @@ export default function DuasPage() {
           {/* header */}
           <ResponsiveHeader />
 
-          <div className="flex items-center flex-row">
+          <div className="flex flex-row">
             {/* Desktop Categories Sidebar */}
             <CategorySidebar data={categories} className="hidden lg:flex" />
 

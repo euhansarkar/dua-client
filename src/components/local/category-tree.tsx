@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronRight, ChevronDown } from "lucide-react";
@@ -26,7 +27,7 @@ export function CategoryTree({
         : [...prev, catId]
     );
 
-    // Update the URL when the category is clicked, including query parameter
+    // Update URL with category
     if (!expandedCategories.includes(catId)) {
       router.push(
         `/duas/${encodeURIComponent(
@@ -36,11 +37,38 @@ export function CategoryTree({
     }
   };
 
-  const toggleSubCategory = (subCatId: number) => {
+  const toggleSubCategory = (
+    catId: number,
+    catName: string,
+    subCatId: number,
+  ) => {
     setExpandedSubCategories((prev) =>
       prev.includes(subCatId)
         ? prev.filter((id) => id !== subCatId)
         : [...prev, subCatId]
+    );
+
+    // Update URL with subcategory
+    if (!expandedSubCategories.includes(subCatId)) {
+      router.push(
+        `/duas/${encodeURIComponent(
+          catName.toLowerCase().replace(/\s+/g, "-")
+        )}?cat=${catId}&subcat=${subCatId}`
+      );
+    }
+  };
+
+  const handleDuaClick = (
+    catId: number,
+    subCatId: number,
+    duaId: number,
+    duaName: string
+  ) => {
+    // Update URL with dua
+    router.push(
+      `/duas/${encodeURIComponent(
+        duaName.toLowerCase().replace(/\s+/g, "-")
+      )}?cat=${catId}&subcat=${subCatId}&dua=${duaId}`
     );
   };
 
@@ -89,7 +117,13 @@ export function CategoryTree({
                   <div key={subCategory.subcat_id} className="ml-4">
                     <div
                       className="flex items-center gap-2 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-                      onClick={() => toggleSubCategory(subCategory.subcat_id)}
+                      onClick={() =>
+                        toggleSubCategory(
+                          category.cat_id,
+                          category.cat_name,
+                          subCategory.subcat_id,
+                        )
+                      }
                     >
                       <ChevronRight
                         className={`h-4 w-4 ${
@@ -114,6 +148,14 @@ export function CategoryTree({
                             key={dua.dua_id}
                             variant="ghost"
                             className="w-full justify-start pl-8 text-xs text-muted-foreground hover:bg-[#1E2732] hover:text-white"
+                            onClick={() =>
+                              handleDuaClick(
+                                category.cat_id,
+                                subCategory.subcat_id,
+                                dua.dua_id,
+                                dua.dua_name
+                              )
+                            }
                           >
                             {dua.dua_name}
                           </Button>
