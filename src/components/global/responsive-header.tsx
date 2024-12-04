@@ -28,7 +28,7 @@ const ResponsiveHeader = () => {
           </Button>
         </div>
       </header>
-      ;{/* Mobile Header */}
+      {/* Mobile Header */}
       <header className="flex items-center justify-between gap-4 border-b border-[#2F3B4B] p-4 lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
