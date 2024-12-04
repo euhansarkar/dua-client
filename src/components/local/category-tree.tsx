@@ -1,5 +1,5 @@
-"use client";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronRight, ChevronDown } from "lucide-react";
@@ -17,13 +17,23 @@ export function CategoryTree({
   const [expandedSubCategories, setExpandedSubCategories] = useState<number[]>(
     []
   );
+  const router = useRouter();
 
-  const toggleCategory = (catId: number) => {
+  const toggleCategory = (catId: number, catName: string) => {
     setExpandedCategories((prev) =>
       prev.includes(catId)
         ? prev.filter((id) => id !== catId)
         : [...prev, catId]
     );
+
+    // Update the URL when the category is clicked, including query parameter
+    if (!expandedCategories.includes(catId)) {
+      router.push(
+        `/duas/${encodeURIComponent(
+          catName.toLowerCase().replace(/\s+/g, "-")
+        )}?cat=${catId}`
+      );
+    }
   };
 
   const toggleSubCategory = (subCatId: number) => {
@@ -47,7 +57,7 @@ export function CategoryTree({
             {/* Category Item */}
             <div
               className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-              onClick={() => toggleCategory(category.cat_id)}
+              onClick={() => toggleCategory(category.cat_id, category.cat_name)}
             >
               <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
                 <Image
