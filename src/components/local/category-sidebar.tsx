@@ -15,7 +15,7 @@ export function CategorySidebar({ data, className }: CategorySidebarProps) {
   return (
     <div
       className={cn(
-        "w-[300px] flex flex-col border-r border-[#2F3B4B] bg-[#0E1319] text-white",
+        "w-[20%] flex flex-col border-r border-[#2F3B4B] bg-[#0E1319] text-white",
         className
       )}
     >
