@@ -15,12 +15,12 @@ export function CategorySidebar({ data, className }: CategorySidebarProps) {
   return (
     <div
       className={cn(
-        "w-[300px] flex flex-col border-r border-[#2F3B4B] bg-[#0E1319]",
+        "w-[300px] flex flex-col border-r border-[#2F3B4B] bg-[#0E1319] text-white",
         className
       )}
     >
       <div className="p-4">
-        <h1 className="mb-4 bg-[#1FA45B] p-2 text-center text-lg font-semibold text-white rounded-md">
+        <h1 className="mb-4 text-lg font-semibold text-center bg-[#1FA45B] text-white rounded-md p-2">
           Categories
         </h1>
         <div className="relative mb-4">

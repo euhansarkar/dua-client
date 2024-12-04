@@ -15,14 +15,12 @@ export default function Home({ children }: ClientLayout) {
         <Sidebar className="hidden lg:flex" />
 
         <main className="flex-1 overflow-y-auto px-4 pb-16 lg:px-8">
-          {/* <header className="sticky top-0 z-10 flex items-center justify-between gap-4 bg-[#0E1319] py-4"> */}
+          <header className="sticky top-0 z-10 w-full items-center justify-between gap-4 bg-[#0E1319] py-4">
             {/* header */}
-            <ResponsiveHeader/>
-          {/* </header> */}
+            <ResponsiveHeader />
+          </header>
 
-          <div className="mt-6">
-            {children}
-          </div>
+          <div className="mt-6">{children}</div>
         </main>
       </div>
 

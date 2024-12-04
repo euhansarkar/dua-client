@@ -1,6 +1,6 @@
-import { ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface CategoryTreeProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,21 +13,29 @@ interface CategoryTreeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function CategoryTree({ data, className }: CategoryTreeProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("space-y-4", className)}>
       {data.map((category) => (
         <div key={category.title} className="space-y-1">
-          <div className="flex items-center gap-2 rounded-lg p-2 hover:bg-[#1E2732]">
-            <div className="h-8 w-8 rounded-lg bg-[#1E2732] p-1">
-              <Image src="/placeholder.svg" alt="" className="h-full w-full" />
+          {/* Category Item */}
+          <div className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732]">
+            <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
+              <Image
+                src="/placeholder.svg"
+                alt={category.title}
+                className="h-full w-full"
+              />
             </div>
             <div className="flex-1">
-              <h3 className="font-medium text-white">{category.title}</h3>
+              <h3 className="text-sm font-medium text-white">
+                {category.title}
+              </h3>
               <p className="text-xs text-muted-foreground">
                 Subcategory: {category.subcategory}
               </p>
             </div>
           </div>
 
+          {/* Subcategories */}
           {category.items.map((item, index) => (
             <div key={index} className="ml-4">
               {typeof item === "string" ? (
