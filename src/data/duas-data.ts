@@ -1,4 +1,6 @@
-export const duasData = [
+import { IDua } from "@/types";
+
+export const duasData: IDua[] = [
     {
         "id": 258,
         "cat_id": 12,

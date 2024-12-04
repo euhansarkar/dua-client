@@ -1,4 +1,6 @@
-export const subCategoriesData = [
+import { ISubCategory } from "@/types";
+
+export const subCategoriesData: ISubCategory[] = [
   {
     id: 26,
     cat_id: 12,

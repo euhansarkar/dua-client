@@ -1,3 +1,5 @@
+import { ICategory } from "@/types";
+
 export const categories = [
   {
     title: "Dua's Importance",
@@ -137,7 +139,7 @@ export const categories = [
   },
 ];
 
-export const categoriesData = [
+export const categoriesData: ICategory[] = [
   {
     id: 1,
     cat_id: 1,

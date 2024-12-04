@@ -11,7 +11,7 @@ interface CategorySidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   }[];
 }
 
-export function CategorySidebar({ data, className }: CategorySidebarProps) {
+export function CategorySidebar({ className }: CategorySidebarProps) {
   return (
     <div
       className={cn(
@@ -32,7 +32,7 @@ export function CategorySidebar({ data, className }: CategorySidebarProps) {
         </div>
       </div>
       <div className="flex-1 overflow-auto">
-        <CategoryTree data={data} className="px-4" />
+        <CategoryTree className="px-4" />
       </div>
     </div>
   );

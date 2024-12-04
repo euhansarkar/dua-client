@@ -1,0 +1,43 @@
+this is my categories data: export const categoriesData = [
+  {
+    id: 1,
+    cat_id: 1,
+    cat_name: "Dua's Importance",
+    no_of_subcat: 7,
+    no_of_dua: 21,
+    cat_icon: "duar_gurutto",
+  },
+ ]. 
+ 
+ and this is my sub-categories dataexport const subCategoriesData = [
+  {
+    id: 26,
+    cat_id: 12,
+    subcat_id: 26,
+    subcat_name: "Going to the mosque",
+    no_of_dua: 2,
+  },
+  {
+    id: 27,
+    cat_id: 12,
+    subcat_id: 27,
+    subcat_name: "Entering the mosque",
+    no_of_dua: 4,
+  }
+];. and this is my duas data: export const duasData = [
+    {
+        "id": 258,
+        "cat_id": 12,
+        "subcat_id": 26,
+        "dua_id": 173,
+        "dua_name": "Prayers while going to the mosque #1",
+        "top": "When the Mu'adhdhin gave the call to prayer, the Prophet (\ufdfa) used to go out for the prayer while reciting this supplication -",
+        "dua_arabic": "\u0627\u064e\u0644\u0644\u0651\u064e\u0647\u064f\u0645\u0651\u064e \u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u064a \u0642\u064e\u0644\u0652\u0628\u0650\u064a\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0641\u0650\u064a \u0644\u0650\u0633\u064e\u0627\u0646\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u064a \u0633\u064e\u0645\u0652\u0639\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u064a \u0628\u064e\u0635\u064e\u0631\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0645\u0650\u0646\u0652 \u062e\u064e\u0644\u0652\u0641\u0650\u064a \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0645\u0650\u0646\u0652 \u0623\u064e\u0645\u064e\u0627\u0645\u0650\u064a\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0645\u0650\u0646\u0652 \u0641\u064e\u0648\u0652\u0642\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0645\u0650\u0646\u0652 \u062a\u064e\u062d\u0652\u062a\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0627\u064e\u0644\u0644\u0651\u064e\u0647\u064f\u0645\u0651\u064e \u0623\u064e\u0639\u0652\u0637\u0650\u0646\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627",
+        "dua_indopak": "\u0627\u064e\u0644\u0644\u0651\u0670\u0647\u064f\u0645\u0651\u064e \u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u0649\u0652 \u0642\u064e\u0644\u0652\u0628\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0641\u0650\u0649\u0652 \u0644\u0650\u0633\u064e\u0627\u0646\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u0649\u0652 \u0633\u064e\u0645\u0652\u0639\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0641\u0650\u0649\u0652 \u0628\u064e\u0635\u064e\u0631\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0645\u0650\u0646\u0652 \u062e\u064e\u0644\u0652\u0641\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0645\u0650\u0646\u0652 \u0627\u064e\u0645\u064e\u0627\u0645\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652 \u0645\u0650\u0646\u0652 \u0641\u064e\u0648\u0652\u0642\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0648\u0651\u064e\u0645\u0650\u0646\u0652 \u062a\u064e\u062d\u0652\u062a\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627 \u0627\u064e\u0644\u0644\u0651\u0670\u0647\u064f\u0645\u0651\u064e \u0627\u064e\u0639\u0652\u0637\u0650\u0646\u0650\u0649\u0652 \u0646\u064f\u0648\u0652\u0631\u064b\u0627",
+        "transliteration": "Allaahumma-j\u201bal fee qalbee noor-an, wa fee lisaanee noor-an, waj\u201bal fee sam\u201bee noor-an, waj\u201bal fee basaree noor-an, waj\u201bal min khalfee noor-an, wamin amaamee noor-an, waj\u201bal min fawqee noor-an, wa min t'ahtee noor-an, Allaahumma a\u201btinee noor-an",
+        "translation": "O Allah, place within my heart light, and upon my tongue light, and within my ears light, and within my eyes light, and place behind me light, and in front of me light, and above me light, and beneath me light. O Allah, bestow upon me light.",
+        "bottom": null,
+        "refference": "Bukhari: 6316",
+        "audio": "https:\/\/api.duaruqyah.com\/duaaudiofinal\/173.mp3"
+    }
+]. you have to create a page with nextjs, tailwindcss shadcn ui. here we have 2 sections in the first section we have category menus when in the left user clicks on a category then sub categories will be shown and when sub categories is clicked by user then duas will be shown, then category section show. and in the right side all duas will be showned. give me then component based on my provided ui image.
