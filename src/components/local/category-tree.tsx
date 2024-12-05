@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,13 +8,19 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import duar_gurutto from "@/assets/duar_gurutto.svg";
 import { ScrollArea } from "../ui/scroll-area";
-import { categoriesData } from "@/data/categories-data";
 import { subCategoriesData } from "@/data/sub-categories-data";
 import { duasData } from "@/data/duas-data";
+import { ICategory } from "@/types";
 
-export function CategoryTree({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+interface CategoryTreeProps {
+  className: string;
+  categories: ICategory[];
+}
+
+export function CategoryTree({ className, categories }: CategoryTreeProps) {
+
+  console.log(`see categories`, categories);
+
   const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
   const [expandedSubCategories, setExpandedSubCategories] = useState<number[]>(
     []
@@ -40,7 +47,7 @@ export function CategoryTree({
   const toggleSubCategory = (
     catId: number,
     catName: string,
-    subCatId: number,
+    subCatId: number
   ) => {
     setExpandedSubCategories((prev) =>
       prev.includes(subCatId)
@@ -80,23 +87,23 @@ export function CategoryTree({
       )}
     >
       <ScrollArea className="flex-1">
-        {categoriesData?.map((category) => (
+        {categories?.map((category) => (
           <div key={category.cat_id} className="space-y-1">
             {/* Category Item */}
             <div
               className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-              onClick={() => toggleCategory(category.cat_id, category.cat_name)}
+              onClick={() => toggleCategory(category.cat_id, category.cat_name_en)}
             >
               <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
                 <Image
                   src={duar_gurutto}
-                  alt={category?.cat_name}
+                  alt={category?.cat_name_en}
                   className="h-full w-full"
                 />
               </div>
               <div className="flex-1">
                 <h3 className="text-sm font-medium text-white">
-                  {category?.cat_name}
+                  {category?.cat_name_en}
                 </h3>
                 <p className="text-xs text-muted-foreground">
                   Subcategory: {category?.no_of_subcat}
@@ -120,8 +127,8 @@ export function CategoryTree({
                       onClick={() =>
                         toggleSubCategory(
                           category.cat_id,
-                          category.cat_name,
-                          subCategory.subcat_id,
+                          category.cat_name_en,
+                          subCategory.subcat_id
                         )
                       }
                     >
@@ -133,7 +140,7 @@ export function CategoryTree({
                         }`}
                       />
                       <span className="text-sm text-muted-foreground hover:text-white">
-                        {subCategory.subcat_name}
+                        {subCategory.subcat_name_en}
                       </span>
                     </div>
 
@@ -153,11 +160,11 @@ export function CategoryTree({
                                 category.cat_id,
                                 subCategory.subcat_id,
                                 dua.dua_id,
-                                dua.dua_name
+                                dua?.dua_name_en!
                               )
                             }
                           >
-                            {dua.dua_name}
+                            {dua?.dua_name_en}
                           </Button>
                         ))}
                   </div>

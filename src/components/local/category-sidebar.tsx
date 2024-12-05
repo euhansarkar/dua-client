@@ -2,16 +2,14 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { CategoryTree } from "./category-tree";
+import { ICategory } from '../../types/common';
 
-interface CategorySidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  data: {
-    title: string;
-    subcategory: number;
-    items: (string | { title: string; items: string[] })[];
-  }[];
+interface CategorySidebarProps {
+  className?: string;
+  categories: ICategory[];
 }
 
-export function CategorySidebar({ className }: CategorySidebarProps) {
+export function CategorySidebar({ categories,  className }: CategorySidebarProps) {
   return (
     <div
       className={cn(
@@ -32,7 +30,7 @@ export function CategorySidebar({ className }: CategorySidebarProps) {
         </div>
       </div>
       <div className="flex-1 overflow-auto">
-        <CategoryTree className="px-4" />
+        <CategoryTree categories={categories} className="px-4" />
       </div>
     </div>
   );
