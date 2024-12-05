@@ -8,20 +8,39 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import duar_gurutto from "@/assets/duar_gurutto.svg";
 import { ScrollArea } from "../ui/scroll-area";
-import { duasData } from "@/data/duas-data";
-import { ICategory, ISubCategory } from "@/types";
+import { useCategoriesQuery } from "@/redux/api/category-api";
+import { useSubCategoriesQuery } from "@/redux/api/sub-categories-api";
+import { ICategory, IDua, ISubCategory } from "@/types";
+import { useDuasQuery } from "@/redux/api/dua-api";
 
 interface CategoryTreeProps {
   className: string;
-  categories: ICategory[];
-  subCategories: ISubCategory[];
 }
 
 export function CategoryTree({
-  subCategories,
   className,
-  categories,
 }: CategoryTreeProps) {
+
+  const { data: categoriesData,
+    // isLoading: categoriesLoading
+  } =
+  useCategoriesQuery({ page: 1, limit: 30 });
+
+  const {
+    data: subCategoriesData,
+    // isLoading: subCategoriesLoadin
+  } = useSubCategoriesQuery({ page: 1, limit: 30 });
+
+  const {
+    data: duasData,
+    // isLoading: subCategoriesLoadin
+  } = useDuasQuery({ page: 1, limit: 200 });
+
+const categories = categoriesData?.categories;
+const subCategories = subCategoriesData?.subCategories;
+const duas = duasData?.duas;
+  
+
   const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
   const [expandedSubCategories, setExpandedSubCategories] = useState<number[]>(
     []
@@ -88,7 +107,7 @@ export function CategoryTree({
       )}
     >
       <ScrollArea className="flex-1">
-        {categories?.map((category) => (
+        {categories?.map((category: ICategory) => (
           <div key={category.cat_id} className="space-y-1">
             {/* Category Item */}
             <div
@@ -120,10 +139,10 @@ export function CategoryTree({
             </div>
 
             {/* Subcategories */}
-            {expandedCategories.includes(category.cat_id) &&
+            {expandedCategories?.includes(category.cat_id) &&
               subCategories
-                .filter((sub) => sub.cat_id === category.cat_id)
-                .map((subCategory) => (
+                ?.filter((sub: ISubCategory) => sub.cat_id === category.cat_id)
+                .map((subCategory: ISubCategory) => (
                   <div key={subCategory.subcat_id} className="ml-4">
                     <div
                       className="flex items-center gap-2 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
@@ -149,11 +168,11 @@ export function CategoryTree({
 
                     {/* Duas */}
                     {expandedSubCategories.includes(subCategory.subcat_id) &&
-                      duasData
-                        .filter(
-                          (dua) => dua.subcat_id === subCategory.subcat_id
+                      duas
+                        ?.filter(
+                          (dua: IDua) => dua.subcat_id === subCategory.subcat_id
                         )
-                        .map((dua) => (
+                        .map((dua: IDua) => (
                           <Button
                             key={dua.dua_id}
                             variant="ghost"

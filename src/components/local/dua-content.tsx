@@ -3,16 +3,17 @@ import { Copy, Bookmark, HelpCircle, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import duacard from "@/assets/duacard.svg"
-import { IDua } from "@/types";
+import { useDuasQuery } from "@/redux/api/dua-api";
 
-interface DuaContentProps {
-  duas: IDua[]
-}
 
-export function DuaContent({ duas }: DuaContentProps) {
-  // const 
 
-  // console.log(`see duas from dua content`, duas);
+export function DuaContent() {
+  const {
+    data: duasData,
+    // isLoading: duasLoading
+  } = useDuasQuery({ page: 1, limit: 100 });
+
+  const duas = duasData?.duas;
 
   return (
     <div className="space-y-4">

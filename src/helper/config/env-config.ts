@@ -1,4 +1,4 @@
-import { APP_CONFIG } from "@/helper/index";
+import { APP_CONFIG } from "@/helper/config/index";
 
 
 export const getBaseUrl = (): string => {

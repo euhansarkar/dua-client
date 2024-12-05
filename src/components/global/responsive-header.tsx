@@ -1,13 +1,13 @@
+"use client";
 import { Search, Settings2, User, Menu } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CategorySidebar } from "../local/category-sidebar";
-import { categoriesData } from "@/data/categories-data";
-import { subCategoriesData } from "@/data/sub-categories-data";
 
 const ResponsiveHeader = () => {
+
   return (
     <div>
       {/* Desktop Header */}
@@ -38,7 +38,7 @@ const ResponsiveHeader = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] p-0 bg-[#0E1319]">
-            <CategorySidebar subCategories={subCategoriesData} categories={categoriesData} />
+            <CategorySidebar />
           </SheetContent>
         </Sheet>
         <div className="flex items-center gap-2">
