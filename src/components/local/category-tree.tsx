@@ -8,19 +8,20 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import duar_gurutto from "@/assets/duar_gurutto.svg";
 import { ScrollArea } from "../ui/scroll-area";
-import { subCategoriesData } from "@/data/sub-categories-data";
 import { duasData } from "@/data/duas-data";
-import { ICategory } from "@/types";
+import { ICategory, ISubCategory } from "@/types";
 
 interface CategoryTreeProps {
   className: string;
   categories: ICategory[];
+  subCategories: ISubCategory[];
 }
 
-export function CategoryTree({ className, categories }: CategoryTreeProps) {
-
-  console.log(`see categories`, categories);
-
+export function CategoryTree({
+  subCategories,
+  className,
+  categories,
+}: CategoryTreeProps) {
   const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
   const [expandedSubCategories, setExpandedSubCategories] = useState<number[]>(
     []
@@ -92,7 +93,9 @@ export function CategoryTree({ className, categories }: CategoryTreeProps) {
             {/* Category Item */}
             <div
               className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-              onClick={() => toggleCategory(category.cat_id, category.cat_name_en)}
+              onClick={() =>
+                toggleCategory(category.cat_id, category.cat_name_en)
+              }
             >
               <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
                 <Image
@@ -118,7 +121,7 @@ export function CategoryTree({ className, categories }: CategoryTreeProps) {
 
             {/* Subcategories */}
             {expandedCategories.includes(category.cat_id) &&
-              subCategoriesData
+              subCategories
                 .filter((sub) => sub.cat_id === category.cat_id)
                 .map((subCategory) => (
                   <div key={subCategory.subcat_id} className="ml-4">

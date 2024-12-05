@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CategorySidebar } from "../local/category-sidebar";
 import { categoriesData } from "@/data/categories-data";
+import { subCategoriesData } from "@/data/sub-categories-data";
 
 const ResponsiveHeader = () => {
   return (
@@ -37,7 +38,7 @@ const ResponsiveHeader = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] p-0 bg-[#0E1319]">
-            <CategorySidebar categories={categoriesData} />
+            <CategorySidebar subCategories={subCategoriesData} categories={categoriesData} />
           </SheetContent>
         </Sheet>
         <div className="flex items-center gap-2">

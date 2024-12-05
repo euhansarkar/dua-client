@@ -2,14 +2,14 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { CategoryTree } from "./category-tree";
-import { ICategory } from '../../types/common';
-
+import { ICategory, ISubCategory } from '../../types/common';
 interface CategorySidebarProps {
   className?: string;
   categories: ICategory[];
+  subCategories: ISubCategory[];
 }
 
-export function CategorySidebar({ categories,  className }: CategorySidebarProps) {
+export function CategorySidebar({ subCategories, categories,  className }: CategorySidebarProps) {
   return (
     <div
       className={cn(
@@ -30,7 +30,11 @@ export function CategorySidebar({ categories,  className }: CategorySidebarProps
         </div>
       </div>
       <div className="flex-1 overflow-auto">
-        <CategoryTree categories={categories} className="px-4" />
+        <CategoryTree
+          subCategories={subCategories}
+          categories={categories}
+          className="px-4"
+        />
       </div>
     </div>
   );

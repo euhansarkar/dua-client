@@ -7,17 +7,43 @@ import { getBaseUrl } from "@/helper/env-config";
 
 export default async function DuasPage() {
   try {
-    // Fetch categories
-    const response = await fetch(`${getBaseUrl()}/categories?page=1&limit=20`);
+    const baseUrl = getBaseUrl();
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch categories: ${response.statusText}`);
+    // Fetch categories, subcategories, and duas in parallel
+    const [categoriesResponse, subcategoriesResponse, duasResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/categories?page=1&limit=20`),
+        fetch(`${baseUrl}/sub-categories?page=1&limit=20`),
+        fetch(`${baseUrl}/duas?page=1&limit=20`),
+      ]);
+
+    // Check responses
+    if (!categoriesResponse.ok) {
+      throw new Error(
+        `Failed to fetch categories: ${categoriesResponse.statusText}`
+      );
+    }
+    if (!subcategoriesResponse.ok) {
+      throw new Error(
+        `Failed to fetch subcategories: ${subcategoriesResponse.statusText}`
+      );
+    }
+    if (!duasResponse.ok) {
+      throw new Error(`Failed to fetch duas: ${duasResponse.statusText}`);
     }
 
     // Parse JSON data
-    const data = await response.json(); // This gives you the actual data
-    const categories = data?.data;
-    console.log(`see categories data`, categories);
+    const [categoriesData, subcategoriesData, duasData] = await Promise.all([
+      categoriesResponse.json(),
+      subcategoriesResponse.json(),
+      duasResponse.json(),
+    ]);
+
+    // Extract data
+    const categories = categoriesData?.data;
+    const subcategories = subcategoriesData?.data;
+    const duas = duasData?.data;
+
 
     return (
       <div className="h-screen overflow-hidden bg-[#0E1319]">
@@ -34,11 +60,12 @@ export default async function DuasPage() {
               {/* Desktop Categories Sidebar */}
               <CategorySidebar
                 categories={categories}
+                subCategories={subcategories}
                 className="hidden lg:flex"
               />
 
               {/* Main Content */}
-              <MainContentArea />
+              <MainContentArea duas={duas} />
             </div>
           </div>
         </div>
@@ -48,7 +75,7 @@ export default async function DuasPage() {
       </div>
     );
   } catch (error) {
-    console.error("Error loading categories:", error);
-    return <div>Error loading categories</div>;
+    console.error("Error loading data:", error);
+    return <div>Error loading data</div>;
   }
 }
