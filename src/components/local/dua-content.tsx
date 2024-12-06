@@ -1,30 +1,40 @@
-"use client";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import duacard from "@/assets/duacard.svg";
 import { Button } from "@/components/ui/button";
 import { getBaseUrl } from "@/helper/config/env-config";
-import { IDua } from "@/types";
+import { ICategory, IDua } from "@/types";
 import { Bookmark, Copy, HelpCircle, Share2 } from "lucide-react";
 import Image from "next/image";
-
 interface DuaContentProps {
   cat?: string;
   subCat?: string;
   dua?: string;
 }
 
-export async function DuaContent({ cat, subCat, dua }: DuaContentProps) {
-  // const {
-  //   data: duasData,
-  //   // isLoading: duasLoading
-  // } = useDuasQuery({ page: 1, limit: 100 });
 
-  // const duas = duasData?.duas;
+export const revalidate = 60;
 
-  console.log(`from ccontext`, cat, subCat, dua);
 
+export const dynamicParams = true; 
+
+export async function generateStaticParams() {
+  const url = `${getBaseUrl()}/duas?page=1&limit=100`;
+  const categories: ICategory[] = await fetch(url).then((res) =>
+    res.json()
+  );
+  // @ts-expect-error
+  return categories?.data?.map((category) => ({
+    id: String(category.id),
+  }));
+}
+
+export async function DuaContent(props: DuaContentProps) {
+  
   try {
     // Fetch categories
-    const response = await fetch(`${getBaseUrl()}/duas?page=1&limit=100`);
+    const url = `${getBaseUrl()}/duas?page=1&limit=100&cat_id${props?.cat}`;;
+    console.log(`see furl from content`, url);
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch categories: ${response.statusText}`);

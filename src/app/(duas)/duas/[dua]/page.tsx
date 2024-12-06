@@ -14,6 +14,8 @@ export default async function DuasPage({ params, searchParams}: DuaPageParams) {
   console.log("param object :", await params);
   const queries = await searchParams;
 
+  console.log(`see queriesss`, queries);
+
   return (
     <div className="h-screen overflow-hidden bg-[#0E1319]">
       <div className="flex h-full">
@@ -31,14 +33,15 @@ export default async function DuasPage({ params, searchParams}: DuaPageParams) {
 
             {/* Main Content */}
             <MainContentArea
-              // @ts-ignore
-              cat={queries?.cat}
-              // @ts-ignore
+              // // @ts-ignore
+              // cat={queries?.cat}
+              // // @ts-ignore
 
-              subCat={queries?.subCat}
-              // @ts-ignore
+              // subCat={queries?.subCat}
+              // // @ts-ignore
 
-              dua={queries?.dua}
+              // dua={queries?.dua}
+              {...queries}
             />
           </div>
         </div>
