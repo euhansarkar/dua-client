@@ -1,13 +1,18 @@
-import React from 'react';
-import { DuaContent } from '../local/dua-content';
+import { DuaContent } from "../local/dua-content";
 
 
-export const MainContentArea = () => {
+interface MainContentAreaProps {
+  cat?: string;
+  subCat?: string;
+  dua?: string;
+}
 
+export const MainContentArea = (props: MainContentAreaProps) => {
+  
   return (
     <div>
       <main className="h-full flex-1 p-1 overflow-auto">
-        <DuaContent />
+        <DuaContent {...props} />
       </main>
     </div>
   );

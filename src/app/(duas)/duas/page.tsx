@@ -5,6 +5,7 @@ import { DuaSidebar } from "@/components/local/dua-sidebar";
 import { MobileNav } from "@/components/local/mobile-nav";
 
 export default function DuasPage() {
+  
   return (
     <div className="h-screen overflow-hidden bg-[#0E1319]">
       <div className="flex h-full">

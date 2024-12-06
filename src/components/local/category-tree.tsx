@@ -8,37 +8,43 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import duar_gurutto from "@/assets/duar_gurutto.svg";
 import { ScrollArea } from "../ui/scroll-area";
-import { useCategoriesQuery } from "@/redux/api/category-api";
-import { useSubCategoriesQuery } from "@/redux/api/sub-categories-api";
+// import { useCategoriesQuery } from "@/redux/api/category-api";
+// import { useSubCategoriesQuery } from "@/redux/api/sub-categories-api";
+// import { useDuasQuery } from "@/redux/api/dua-api";
 import { ICategory, IDua, ISubCategory } from "@/types";
-import { useDuasQuery } from "@/redux/api/dua-api";
 
 interface CategoryTreeProps {
   className: string;
+  categories: ICategory[];
+  subCategories: ISubCategory[];
+  duas: IDua[];
 }
 
 export function CategoryTree({
   className,
+  categories,
+  subCategories,
+  duas
 }: CategoryTreeProps) {
 
-  const { data: categoriesData,
-    // isLoading: categoriesLoading
-  } =
-  useCategoriesQuery({ page: 1, limit: 30 });
+//   const { data: categoriesData,
+//     // isLoading: categoriesLoading
+//   } =
+//   useCategoriesQuery({ page: 1, limit: 30 });
 
-  const {
-    data: subCategoriesData,
-    // isLoading: subCategoriesLoadin
-  } = useSubCategoriesQuery({ page: 1, limit: 30 });
+//   const {
+//     data: subCategoriesData,
+//     // isLoading: subCategoriesLoadin
+//   } = useSubCategoriesQuery({ page: 1, limit: 30 });
 
-  const {
-    data: duasData,
-    // isLoading: subCategoriesLoadin
-  } = useDuasQuery({ page: 1, limit: 200 });
+//   const {
+//     data: duasData,
+//     // isLoading: subCategoriesLoadin
+//   } = useDuasQuery({ page: 1, limit: 200 });
 
-const categories = categoriesData?.categories;
-const subCategories = subCategoriesData?.subCategories;
-const duas = duasData?.duas;
+// const categories = categoriesData?.categories;
+// const subCategories = subCategoriesData?.subCategories;
+// const duas = duasData?.duas;
   
 
   const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
@@ -46,6 +52,7 @@ const duas = duasData?.duas;
     []
   );
   const router = useRouter();
+
 
   const toggleCategory = (catId: number, catName: string) => {
     setExpandedCategories((prev) =>
