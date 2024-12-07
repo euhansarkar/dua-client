@@ -18,7 +18,7 @@ const ResponsiveHeader = ({ name }: ResponsiveHeaderProps) => {
     <div>
       {/* Desktop Header */}
       <header className="sticky top-0 z-10 hidden items-center justify-between gap-4 border-b border-[#2F3B4B] bg-[#0E1319] p-4 lg:flex">
-        <h1 className="text-xl font-semibold text-white">{name}</h1>
+        <h1 className="text-xl hidden lg:block font-semibold text-white">{name}</h1>
         <div className="flex items-center gap-4">
           <div className="relative max-w-xl">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
