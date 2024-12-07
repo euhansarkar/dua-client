@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
+// /* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronRight, ChevronDown } from "lucide-react";
@@ -27,50 +28,13 @@ export function CategoryTree({
   const [expandedSubCategory, setExpandedSubCategory] = useState<number | null>(
     null
   );
-  const router = useRouter();
 
-  const toggleCategory = (catId: number, catName: string) => {
+  const toggleCategory = (catId: number) => {
     setExpandedCategory((prev) => (prev === catId ? null : catId));
-
-    // Update URL with category
-    if (expandedCategory !== catId) {
-      router.push(
-        `/duas/${encodeURIComponent(
-          catName.toLowerCase().replace(/\s+/g, "-")
-        )}?cat=${catId}`
-      );
-    }
   };
 
-  const toggleSubCategory = (
-    catId: number,
-    catName: string,
-    subCatId: number
-  ) => {
+  const toggleSubCategory = (subCatId: number) => {
     setExpandedSubCategory((prev) => (prev === subCatId ? null : subCatId));
-
-    // Update URL with subcategory
-    if (expandedSubCategory !== subCatId) {
-      router.push(
-        `/duas/${encodeURIComponent(
-          catName.toLowerCase().replace(/\s+/g, "-")
-        )}?cat=${catId}&subcat=${subCatId}`
-      );
-    }
-  };
-
-  const handleDuaClick = (
-    catId: number,
-    subCatId: number,
-    duaId: number,
-    duaName: string
-  ) => {
-    // Update URL with dua
-    router.push(
-      `/duas/${encodeURIComponent(
-        duaName.toLowerCase().replace(/\s+/g, "-")
-      )}?cat=${catId}&subcat=${subCatId}&dua=${duaId}`
-    );
   };
 
   return (
@@ -84,33 +48,35 @@ export function CategoryTree({
         {categories?.map((category: ICategory) => (
           <div key={category.cat_id} className="space-y-1">
             {/* Category Item */}
-            <div
-              className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-              onClick={() =>
-                toggleCategory(category.cat_id, category.cat_name_en)
-              }
+            <Link
+              href={`/duas/${encodeURIComponent(
+                category.cat_name_en.toLowerCase().replace(/\s+/g, "-")
+              )}?cat=${category.cat_id}`}
+              onClick={() => toggleCategory(category.cat_id)}
             >
-              <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
-                <Image
-                  src={duar_gurutto}
-                  alt={category?.cat_name_en}
-                  className="h-full w-full"
-                />
+              <div className="flex items-center gap-3 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer">
+                <div className="h-8 w-8 rounded-md bg-[#1E2732] flex items-center justify-center">
+                  <Image
+                    src={duar_gurutto}
+                    alt={category?.cat_name_en}
+                    className="h-full w-full"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-sm font-medium text-white">
+                    {category?.cat_name_en}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    Subcategory: {category?.no_of_subcat}
+                  </p>
+                </div>
+                {expandedCategory === category.cat_id ? (
+                  <ChevronDown className="h-4 w-4 text-white" />
+                ) : (
+                  <ChevronRight className="h-4 w-4 text-white" />
+                )}
               </div>
-              <div className="flex-1">
-                <h3 className="text-sm font-medium text-white">
-                  {category?.cat_name_en}
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  Subcategory: {category?.no_of_subcat}
-                </p>
-              </div>
-              {expandedCategory === category.cat_id ? (
-                <ChevronDown className="h-4 w-4 text-white" />
-              ) : (
-                <ChevronRight className="h-4 w-4 text-white" />
-              )}
-            </div>
+            </Link>
 
             {/* Subcategories */}
             {expandedCategory === category.cat_id &&
@@ -118,27 +84,27 @@ export function CategoryTree({
                 ?.filter((sub: ISubCategory) => sub.cat_id === category.cat_id)
                 .map((subCategory: ISubCategory) => (
                   <div key={subCategory.subcat_id} className="ml-4">
-                    <div
-                      className="flex items-center gap-2 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer"
-                      onClick={() =>
-                        toggleSubCategory(
-                          category.cat_id,
-                          category.cat_name_en,
-                          subCategory.subcat_id
-                        )
-                      }
+                    <Link
+                      href={`/duas/${encodeURIComponent(
+                        category.cat_name_en.toLowerCase().replace(/\s+/g, "-")
+                      )}?cat=${category.cat_id}&subcat=${
+                        subCategory.subcat_id
+                      }`}
+                      onClick={() => toggleSubCategory(subCategory.subcat_id)}
                     >
-                      <ChevronRight
-                        className={`h-4 w-4 ${
-                          expandedSubCategory === subCategory.subcat_id
-                            ? "rotate-90 text-white"
-                            : "text-muted-foreground"
-                        }`}
-                      />
-                      <span className="text-sm text-muted-foreground hover:text-white">
-                        {subCategory.subcat_name_en}
-                      </span>
-                    </div>
+                      <div className="flex items-center gap-2 p-2 rounded-md hover:bg-[#1E2732] cursor-pointer">
+                        <ChevronRight
+                          className={`h-4 w-4 ${
+                            expandedSubCategory === subCategory.subcat_id
+                              ? "rotate-90 text-white"
+                              : "text-muted-foreground"
+                          }`}
+                        />
+                        <span className="text-sm text-muted-foreground hover:text-white">
+                          {subCategory.subcat_name_en}
+                        </span>
+                      </div>
+                    </Link>
 
                     {/* Duas */}
                     {expandedSubCategory === subCategory.subcat_id &&
@@ -147,21 +113,21 @@ export function CategoryTree({
                           (dua: IDua) => dua.subcat_id === subCategory.subcat_id
                         )
                         .map((dua: IDua) => (
-                          <Button
+                          <Link
                             key={dua.dua_id}
-                            variant="ghost"
-                            className="w-full justify-start pl-8 text-xs text-muted-foreground hover:bg-[#1E2732] hover:text-white"
-                            onClick={() =>
-                              handleDuaClick(
-                                category.cat_id,
-                                subCategory.subcat_id,
-                                dua.dua_id,
-                                dua?.dua_name_en!
-                              )
-                            }
+                            href={`/duas/${encodeURIComponent(
+                              dua?.dua_name_en!?.toLowerCase()?.replace(/\s+/g, "-")
+                            )}?cat=${category.cat_id}&subcat=${
+                              subCategory.subcat_id
+                            }&dua=${dua.dua_id}`}
                           >
-                            {dua?.dua_name_en}
-                          </Button>
+                            <Button
+                              variant="ghost"
+                              className="w-full justify-start pl-8 text-xs text-muted-foreground hover:bg-[#1E2732] hover:text-white"
+                            >
+                              {dua?.dua_name_en}
+                            </Button>
+                          </Link>
                         ))}
                   </div>
                 ))}
@@ -171,3 +137,5 @@ export function CategoryTree({
     </div>
   );
 }
+
+
