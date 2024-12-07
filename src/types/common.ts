@@ -29,6 +29,8 @@ export interface ICategory {
   no_of_subcat: number;
   no_of_dua: number;
   cat_icon: string;
+  subCategories?: ISubCategory[];
+  duas?: IDua[];
 }
 
 export interface ISubCategory {
@@ -38,6 +40,7 @@ export interface ISubCategory {
   subcat_name_bn: string;
   subcat_name_en: string;
   no_of_dua: number;
+  duas?: IDua[];
 }
 
 export interface IDua {

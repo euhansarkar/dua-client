@@ -27,19 +27,42 @@ export function DuaSidebar({ className }: SidebarProps) {
     >
       {/* Logo */}
       <div className="flex justify-center items-center gap-2 p-4">
-        <Image
-          src={logo}
-          alt="Dua Logo"
-          width={80}
-          height={80}
-          className="rounded-xl"
-        />
+        <Link href={`/`}>
+          <Image
+            src={logo}
+            alt="Dua Logo"
+            width={50}
+            height={50}
+            className="rounded-xl"
+          />
+        </Link>
       </div>
 
       {/* Scrollable Navigation */}
       <ScrollArea className="flex-1">
         <nav className="space-y-2 p-4">
           <NavItem href="/" icon={Home} isActive />
+          <NavItem href="/duas" icon={LayoutGrid} />
+          <NavItem href="/memorize" icon={Lightbulb} />
+          <NavItem href="/bookmark" icon={Bookmark} />
+          <NavItem href="/ruqyah" icon={Book} />
+          <NavItem href="/dua-info" icon={MessageCircle} />
+          <NavItem href="/books" icon={BookOpen} />
+          <NavItem href="/" icon={Home}  />
+          <NavItem href="/duas" icon={LayoutGrid} />
+          <NavItem href="/memorize" icon={Lightbulb} />
+          <NavItem href="/bookmark" icon={Bookmark} />
+          <NavItem href="/ruqyah" icon={Book} />
+          <NavItem href="/dua-info" icon={MessageCircle} />
+          <NavItem href="/books" icon={BookOpen} />
+          <NavItem href="/" icon={Home}  />
+          <NavItem href="/duas" icon={LayoutGrid} />
+          <NavItem href="/memorize" icon={Lightbulb} />
+          <NavItem href="/bookmark" icon={Bookmark} />
+          <NavItem href="/ruqyah" icon={Book} />
+          <NavItem href="/dua-info" icon={MessageCircle} />
+          <NavItem href="/books" icon={BookOpen} />
+          <NavItem href="/" icon={Home}  />
           <NavItem href="/duas" icon={LayoutGrid} />
           <NavItem href="/memorize" icon={Lightbulb} />
           <NavItem href="/bookmark" icon={Bookmark} />
@@ -64,12 +87,12 @@ function NavItem({ href, icon: Icon, isActive }: NavItemProps) {
       <Button
         variant="ghost"
         className={cn(
-          "w-full justify-center text-muted-foreground", // Centering icon
+          "w-full justify-center text-muted-foreground",
           isActive &&
             "bg-[#1FA45B] text-white hover:bg-[#1FA45B] hover:text-white"
         )}
       >
-        <Icon className="h-16 w-16" />
+        <Icon className="h-32 w-32" size={40} />
       </Button>
     </Link>
   );

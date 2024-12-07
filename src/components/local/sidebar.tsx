@@ -26,13 +26,15 @@ export function Sidebar({ className }: SidebarProps) {
       )}
     >
       <div className="flex justify-center items-center gap-2 p-4">
+        <Link href={`/`}>
         <Image
           src={logo}
           alt="Dua Logo"
           width={50}
           height={50}
           className="rounded-xl"
-        />
+          />
+        </Link>
       </div>
 
       <ScrollArea className="flex-1">

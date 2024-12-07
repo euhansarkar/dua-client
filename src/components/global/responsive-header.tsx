@@ -5,14 +5,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CategorySidebar } from "../local/category-sidebar";
+import logo from "@/assets/dua-logo.svg";
+import user from "@/assets/profile.svg";
 
-const ResponsiveHeader = () => {
+interface ResponsiveHeaderProps {
+  name: string;
+}
+
+const ResponsiveHeader = ({ name }: ResponsiveHeaderProps) => {
 
   return (
     <div>
       {/* Desktop Header */}
       <header className="sticky top-0 z-10 hidden items-center justify-between gap-4 border-b border-[#2F3B4B] bg-[#0E1319] p-4 lg:flex">
-        <h1 className="text-xl font-semibold text-white">Duas Page</h1>
+        <h1 className="text-xl font-semibold text-white">{name}</h1>
         <div className="flex items-center gap-4">
           <div className="relative max-w-xl">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -25,7 +31,14 @@ const ResponsiveHeader = () => {
             <Settings2 className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="text-white">
-            <User className="h-5 w-5" />
+            {/* <User className="h-5 w-5" /> */}
+            <Image
+              src={user}
+              alt="Dua Logo"
+              width={32}
+              height={32}
+              className="rounded-md"
+            />
           </Button>
         </div>
       </header>
@@ -43,7 +56,7 @@ const ResponsiveHeader = () => {
         </Sheet>
         <div className="flex items-center gap-2">
           <Image
-            src="/placeholder.svg"
+            src={logo}
             alt="Dua Logo"
             width={32}
             height={32}

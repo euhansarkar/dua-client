@@ -39,7 +39,7 @@ export async function CategorySidebar({ className }: CategorySidebarProps) {
     return (
       <div
         className={cn(
-          "w-[20%] flex flex-col border-r border-[#2F3B4B] bg-[#0E1319] text-white",
+          "flex flex-col border-r border-[#2F3B4B] bg-[#0E1319] text-white",
           className
         )}
       >

@@ -23,26 +23,16 @@ export default async function DuasPage({ params, searchParams}: DuaPageParams) {
         <DuaSidebar className="hidden lg:flex" />
 
         {/* Main Content Area */}
-        <div className="flex w-full flex-col">
-          {/* Header */}
-          <ResponsiveHeader />
+        <div className="flex flex-1 flex-col">
+          {/* Responsive Header */}
+          <ResponsiveHeader name="Duas Page" />
 
-          <div className="flex flex-row h-full">
-            {/* Desktop Categories Sidebar */}
-            <CategorySidebar className="hidden lg:flex" />
+          <div className="flex h-full">
+            {/* Category Sidebar */}
+            <CategorySidebar className="hidden lg:flex lg:w-1/4 " />
 
             {/* Main Content */}
-            <MainContentArea
-              // // @ts-ignore
-              // cat={queries?.cat}
-              // // @ts-ignore
-
-              // subCat={queries?.subCat}
-              // // @ts-ignore
-
-              // dua={queries?.dua}
-              {...queries}
-            />
+            <MainContentArea className="flex-1" {...queries} />
           </div>
         </div>
       </div>

@@ -8,9 +8,6 @@ import { ChevronRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import duar_gurutto from "@/assets/duar_gurutto.svg";
 import { ScrollArea } from "../ui/scroll-area";
-// import { useCategoriesQuery } from "@/redux/api/category-api";
-// import { useSubCategoriesQuery } from "@/redux/api/sub-categories-api";
-// import { useDuasQuery } from "@/redux/api/dua-api";
 import { ICategory, IDua, ISubCategory } from "@/types";
 
 interface CategoryTreeProps {
@@ -24,45 +21,19 @@ export function CategoryTree({
   className,
   categories,
   subCategories,
-  duas
+  duas,
 }: CategoryTreeProps) {
-
-//   const { data: categoriesData,
-//     // isLoading: categoriesLoading
-//   } =
-//   useCategoriesQuery({ page: 1, limit: 30 });
-
-//   const {
-//     data: subCategoriesData,
-//     // isLoading: subCategoriesLoadin
-//   } = useSubCategoriesQuery({ page: 1, limit: 30 });
-
-//   const {
-//     data: duasData,
-//     // isLoading: subCategoriesLoadin
-//   } = useDuasQuery({ page: 1, limit: 200 });
-
-// const categories = categoriesData?.categories;
-// const subCategories = subCategoriesData?.subCategories;
-// const duas = duasData?.duas;
-  
-
-  const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
-  const [expandedSubCategories, setExpandedSubCategories] = useState<number[]>(
-    []
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+  const [expandedSubCategory, setExpandedSubCategory] = useState<number | null>(
+    null
   );
   const router = useRouter();
 
-
   const toggleCategory = (catId: number, catName: string) => {
-    setExpandedCategories((prev) =>
-      prev.includes(catId)
-        ? prev.filter((id) => id !== catId)
-        : [...prev, catId]
-    );
+    setExpandedCategory((prev) => (prev === catId ? null : catId));
 
     // Update URL with category
-    if (!expandedCategories.includes(catId)) {
+    if (expandedCategory !== catId) {
       router.push(
         `/duas/${encodeURIComponent(
           catName.toLowerCase().replace(/\s+/g, "-")
@@ -76,14 +47,10 @@ export function CategoryTree({
     catName: string,
     subCatId: number
   ) => {
-    setExpandedSubCategories((prev) =>
-      prev.includes(subCatId)
-        ? prev.filter((id) => id !== subCatId)
-        : [...prev, subCatId]
-    );
+    setExpandedSubCategory((prev) => (prev === subCatId ? null : subCatId));
 
     // Update URL with subcategory
-    if (!expandedSubCategories.includes(subCatId)) {
+    if (expandedSubCategory !== subCatId) {
       router.push(
         `/duas/${encodeURIComponent(
           catName.toLowerCase().replace(/\s+/g, "-")
@@ -109,7 +76,7 @@ export function CategoryTree({
   return (
     <div
       className={cn(
-        "w-64 flex flex-col h-screen border-r border-[#2F3B4B] bg-[#0E1319]",
+        "w-full flex flex-col h-full border-r border-[#2F3B4B] bg-[#0E1319]",
         className
       )}
     >
@@ -138,7 +105,7 @@ export function CategoryTree({
                   Subcategory: {category?.no_of_subcat}
                 </p>
               </div>
-              {expandedCategories.includes(category.cat_id) ? (
+              {expandedCategory === category.cat_id ? (
                 <ChevronDown className="h-4 w-4 text-white" />
               ) : (
                 <ChevronRight className="h-4 w-4 text-white" />
@@ -146,7 +113,7 @@ export function CategoryTree({
             </div>
 
             {/* Subcategories */}
-            {expandedCategories?.includes(category.cat_id) &&
+            {expandedCategory === category.cat_id &&
               subCategories
                 ?.filter((sub: ISubCategory) => sub.cat_id === category.cat_id)
                 .map((subCategory: ISubCategory) => (
@@ -163,7 +130,7 @@ export function CategoryTree({
                     >
                       <ChevronRight
                         className={`h-4 w-4 ${
-                          expandedSubCategories.includes(subCategory.subcat_id)
+                          expandedSubCategory === subCategory.subcat_id
                             ? "rotate-90 text-white"
                             : "text-muted-foreground"
                         }`}
@@ -174,7 +141,7 @@ export function CategoryTree({
                     </div>
 
                     {/* Duas */}
-                    {expandedSubCategories.includes(subCategory.subcat_id) &&
+                    {expandedSubCategory === subCategory.subcat_id &&
                       duas
                         ?.filter(
                           (dua: IDua) => dua.subcat_id === subCategory.subcat_id

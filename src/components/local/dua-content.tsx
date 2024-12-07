@@ -5,6 +5,7 @@ import { getBaseUrl } from "@/helper/config/env-config";
 import { ICategory, IDua } from "@/types";
 import { Bookmark, Copy, HelpCircle, Share2 } from "lucide-react";
 import Image from "next/image";
+import { DataNotFound } from "../not-found/not-found";
 interface DuaContentProps {
   cat?: string;
   subCat?: string;
@@ -18,7 +19,7 @@ export const revalidate = 60;
 export const dynamicParams = true; 
 
 export async function generateStaticParams() {
-  const url = `${getBaseUrl()}/duas?page=1&limit=100`;
+  const url = `${getBaseUrl()}/categories?page=1&limit=100`;
   const categories: ICategory[] = await fetch(url).then((res) =>
     res.json()
   );
@@ -32,8 +33,7 @@ export async function DuaContent(props: DuaContentProps) {
   
   try {
     // Fetch categories
-    const url = `${getBaseUrl()}/duas?page=1&limit=100&cat_id${props?.cat}`;;
-    console.log(`see furl from content`, url);
+    const url = `${getBaseUrl()}/categories/${props?.cat}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -41,11 +41,10 @@ export async function DuaContent(props: DuaContentProps) {
     }
 
     // Parse JSON data
-    const data = await response.json(); // This gives you the actual data
-    const duas = data?.data;
+    const category = await response.json(); // This gives you the actual data
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 w-full h-full">
         {/* <div className="rounded-lg bg-[#1E2732] p-4">
         <p className="text-white">
           <span className="text-[#1FA45B]">Section: </span>
@@ -53,7 +52,7 @@ export async function DuaContent(props: DuaContentProps) {
         </p>
       </div> */}
         {/* <ScrollArea className="flex-1"> */}
-        {duas?.map((dua: IDua) => (
+        {category?.data?.duas?.map((dua: IDua) => (
           <div key={dua?.id} className="rounded-lg bg-[#1E2732] p-6 m-8">
             <div className="mb-4 flex items-center gap-4">
               <div className="h-10 w-10 rounded-lg bg-[#0E1319] p-2">
@@ -95,6 +94,6 @@ export async function DuaContent(props: DuaContentProps) {
     );
   } catch (error) {
     console.error("Error loading categories:", error);
-    return <div>Error loading categories</div>;
+    return <DataNotFound message="An error occurred while loading the data." />;
   }
 }
