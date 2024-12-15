@@ -1,13 +1,11 @@
 "use client";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { store } from "@/redux/store";
-import { Provider } from "react-redux";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Provider store={store}>
+    <div>
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
@@ -28,7 +26,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           />
         </TooltipProvider>
       </ThemeProvider>
-    </Provider>
+    </div>
   );
 };
 

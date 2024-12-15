@@ -1,40 +1,13 @@
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { CategoryTree } from "./category-tree";
-import { getBaseUrl } from "@/helper/config/env-config";
-
+import CategoryTree from "./category-tree";
 interface CategorySidebarProps {
   className?: string;
 }
 
-
-export async function CategorySidebar({ className }: CategorySidebarProps) {
+export function CategorySidebar({ className }: CategorySidebarProps) {
   try {
-    const baseUrl = getBaseUrl();
-
-    // Fetch data
-    const [categoriesResponse, subcategoriesResponse, duasResponse] =
-      await Promise.all([
-        fetch(`${baseUrl}/categories?page=1&limit=20`),
-        fetch(`${baseUrl}/sub-categories?page=1&limit=20`),
-        fetch(`${baseUrl}/duas?page=1&limit=100`),
-      ]);
-
-    if (
-      !categoriesResponse.ok ||
-      !subcategoriesResponse.ok ||
-      !duasResponse.ok
-    ) {
-      throw new Error("Failed to fetch one or more data sets.");
-    }
-
-    const [categories, subCategories, duas]= await Promise.all([
-      categoriesResponse.json().then((data) => data.data),
-      subcategoriesResponse.json().then((data) => data.data),
-      duasResponse.json().then((data) => data.data),
-    ]);
-
 
     return (
       <div
@@ -56,19 +29,16 @@ export async function CategorySidebar({ className }: CategorySidebarProps) {
           </div>
         </div>
         <div className="flex-1 overflow-auto">
-          <CategoryTree
-            categories={categories}
-            subCategories={subCategories}
-            duas={duas}
-            className="px-4"
-          />
+          <CategoryTree  className="px-4" />
         </div>
       </div>
     );
   } catch (error) {
     console.error("Error loading data:", error);
     return (
-      <div className="p-4 text-center text-red-500">Error loading data</div>
+      <div className="p-4 text-center text-red-500">
+        Error loading categories
+      </div>
     );
   }
 }
